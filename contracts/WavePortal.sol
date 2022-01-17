@@ -5,7 +5,7 @@ pragma solidity ^0.8.4;
 import "hardhat/console.sol";
 
 contract WavePortal {
-    uint256 totalWaves;
+    uint256 totalColors;
     struct userInfo {
         string name;
         string email;
@@ -23,8 +23,8 @@ contract WavePortal {
     }
 */
     function getColorsMetrics() public view returns(uint256) {
-        console.log("We have total waves!", totalWaves);
-        return totalWaves;
+        console.log("We have total waves!", totalColors);
+        return totalColors;
     }
 
     function registerUser(string memory name, string memory email, string memory favorite_color, uint256 id) public {
@@ -33,6 +33,7 @@ contract WavePortal {
         newUser.email = email;
         newUser.favorite_color = favorite_color;
         userIds.push(id);
+        totalColors++;
     }
 
     function getUsers() public view returns (uint256) {
