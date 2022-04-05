@@ -5,18 +5,22 @@ pragma solidity ^0.8.4;
 import "hardhat/console.sol";
 
 contract WavePortal {
-    uint256 totalColors;
-
+    string[] public colors;
     constructor() {
         console.log("Hello, World! I am a contract");
     }
-    function getColorsMetrics() public view returns(uint256) {
-        console.log("We have total waves!", totalColors);
-        return totalColors;
+    function getColors() public view returns(string[] memory) {
+        return colors;
     }
 
-    function registerColor() public {
-        totalColors += 1;
+
+    function getTotalColors() public view returns(uint256) {
+        return colors.length;
+    }
+    
+
+    function registerColor(string memory color) public {
+        colors.push(color);
     }
 
 }
