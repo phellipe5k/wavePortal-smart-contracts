@@ -15,7 +15,7 @@ contract WavePortal {
     ColorVote[] colors;
 
     
-    constructor() {
+    constructor() payable {
         console.log("Hello, World! I am a contract");
     }
     function getColors() public view returns(ColorVote[] memory) {
@@ -32,6 +32,12 @@ contract WavePortal {
         colors.push(ColorVote(msg.sender, color, block.timestamp));
 
         emit NewVote(msg.sender, block.timestamp, color);
+
+        uint256 prizeAmount = 0.0001 ether;
+
+        require(prizeAmount <= address(this).balance, "Trying to withdraw more money than the contract has");
+        (bool success, ) = (msg.sender).call{ value: prizeAmount }("");
+        require(success, "Failed to withdraw money from contract");
     }
 
 }
