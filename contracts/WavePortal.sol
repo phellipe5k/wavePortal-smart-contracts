@@ -5,11 +5,20 @@ pragma solidity ^0.8.4;
 import "hardhat/console.sol";
 
 contract WavePortal {
-    string[] public colors;
+    event NewVote(address indexed from, uint256 timestamp, string color);
+    
+    struct ColorVote {
+        address user;
+        string color;
+        uint256 timestamp;
+    }
+    ColorVote[] colors;
+
+    
     constructor() {
         console.log("Hello, World! I am a contract");
     }
-    function getColors() public view returns(string[] memory) {
+    function getColors() public view returns(ColorVote[] memory) {
         return colors;
     }
 
@@ -20,7 +29,9 @@ contract WavePortal {
     
 
     function registerColor(string memory color) public {
-        colors.push(color);
+        colors.push(ColorVote(msg.sender, color, block.timestamp));
+
+        emit NewVote(msg.sender, block.timestamp, color);
     }
 
 }
