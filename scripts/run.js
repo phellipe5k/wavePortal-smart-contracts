@@ -27,7 +27,7 @@ const request = async () => {
     );
 
     const [_, randomPerson] = await hre.ethers.getSigners();
-    waveTxn = await waveContract.connect(randomPerson).registerColor("blue");
+    waveTxn = await waveContract.registerColor("blue");
     await waveTxn.wait();
 
     contractBalance = await hre.ethers.provider.getBalance(
