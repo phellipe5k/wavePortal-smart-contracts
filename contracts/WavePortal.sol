@@ -43,7 +43,7 @@ contract WavePortal {
          */
          require(
              lastWavedAt[msg.sender] + 15 minutes < block.timestamp,
-             "Wait 15m"
+             "Must wait 15 minutes before voting again"
          );
 
          /* if he passed, create a new timestamp for him */
